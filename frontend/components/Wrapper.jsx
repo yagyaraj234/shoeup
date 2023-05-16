@@ -1,9 +1,9 @@
 import React, { Children } from 'react'
 
-const Wrapper = ({ childeren, className }) => {
+const Wrapper = ({ children, className }) => {
     return (
         <div className={`w-full max-w-[1280px] px-5 md:px-10 mx-auto ${className || ''}`}>
-            {Children}
+            {children}
         </div>
     )
 }
