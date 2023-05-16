@@ -1,6 +1,11 @@
 import "@/styles/globals.css";
 import Head from "next/head";
-Head
+
+// Components
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+
 export default function App({ Component, pageProps }) {
   return (
     <>
@@ -20,7 +25,9 @@ export default function App({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
+      <Header></Header>
       <Component {...pageProps} />
+      <Footer/>
     </>
   );
 }
