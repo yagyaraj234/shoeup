@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'next/link';
-import { BsChevronDown } from 'react-icons'
+// import { BsChevronDown } from 'react-icons'
+// import {C} from '@heroicons/react'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
 
 const data = [
     { id: 1, name: "Home", url: "/" },
@@ -23,20 +25,21 @@ const Menu = ({ showCatMenu, setShowCatMenu }) => {
                 return (
                     <React.Fragment key={item.id}>
                         {!!item?.subMenu ? (
-                            <li className='cursor-pointer flex items-center gap-2 relative '>{item.name}
-                                <BsChevronDown />
+                            <li className='cursor-pointer flex items-center gap-2 relative ' onMouseEnter={() => setShowCatMenu(true)}
+                                onMouseLeave={() => setShowCatMenu(false)}>{item.name}
+                                <ChevronDownIcon className='h-6 w-6 ' />
                                 {showCatMenu && (
-                                    <ul className='bg-white absolute top-6 left-0 min-w-[250px] text-black shadow-lg'>
+                                    <ul className='bg-white absolute top-6 left-0 min-w-[250px] text-black shadow-lg p-1'>
                                         {subMenuData.map((submenu) => {
                                             return (
                                                 <Link key={submenu.id} href="/">
                                                     <li className='h-12 flex rounded-md justify-between items-center px-3 hover:bg-black/[0.03]
                                                     '>
                                                         {submenu.name}
+                                                        <span className='opacity-50 text-sm'>78</span>
                                                     </li>
-                                                    <span className='opacity-50 text-sm'>78</span>
                                                 </Link>
-                                            )
+                                            );
                                         })}
                                     </ul>
                                 )}
