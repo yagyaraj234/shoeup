@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <header className={`w-full h-[50px] md:h-[80px] bg-white items-center justify-between z-20 sticky top-0 transition-transform dutation-300 ${show} `}>
 
-      <Wrapper>
+      <Wrapper className='h-[60px] flex justify-between items-center '>
         <Link href="/"><img src='/logo.svg' className="w-[40px] md:w-[60px] " /></Link>
         <Menu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu} />
       </Wrapper>
