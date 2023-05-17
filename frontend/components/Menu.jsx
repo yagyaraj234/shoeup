@@ -32,7 +32,7 @@ const Menu = ({ showCatMenu, setShowCatMenu }) => {
                                     <ul className='bg-white absolute top-6 left-0 min-w-[250px] text-black shadow-lg p-1'>
                                         {subMenuData.map((submenu) => {
                                             return (
-                                                <Link key={submenu.id} href="/">
+                                                <Link key={submenu.id} href="/" onClick={()=>setShowCatMenu(false)}>
                                                     <li className='h-12 flex rounded-md justify-between items-center px-3 hover:bg-black/[0.03]
                                                     '>
                                                         {submenu.name}
