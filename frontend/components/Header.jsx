@@ -4,6 +4,7 @@ Wrapper
 import Link from 'next/link'
 import Menu from './Menu';
 import MobileMenu  from './MobileMenu'
+import Image from 'next/image';
 
 // Icons importing
 import { IoMdHeartEmpty } from 'react-icons/io'
@@ -19,12 +20,32 @@ const Header = () => {
   const [show, setShow] = useState('translate-y-0');
   const [lastScrollY, setLastScrollY] = useState(0);
 
+  const controlNavbar =()=>{
+    if(window.scrollY >200){
+      if(window.scrollY > lastScrollY){
+        setShow('-translate-y-[80px]'  )
+      }else{
+        setShow('shadow-sm')
+      }
+    }else{
+      setShow('translate-y-0');
+    }
+    setLastScrollY(window.scrollY);
+  }
+  useEffect(()=>{
+    window.addEventListener('scroll',controlNavbar);
+    return ()=>{
+      window.removeEventListener('scroll',controlNavbar)
+    }
+  },[lastScrollY])
+
 
   return (
-    <header className={`w-full h-[50px] md:h-[80px] bg-white items-center justify-between z-20 sticky top-0 transition-transform dutation-300 ${show} `}>
+    <header className={`w-full h-[50px] md:h-[60px] bg-white items-center justify-between
+     md:px-[150px]  z-20 sticky top-0 transition-transform dutation-300 ${show} `}>
 
       <Wrapper className='h-[60px] flex justify-between items-center '>
-        <Link href="/"><img src='/logo.svg' className="w-[40px] md:w-[60px] " /></Link>
+        <Link href="/"><Image src='/logo.svg' className="w-[40px] md:w-[60px] alt" alt='logo' width={40} height={40} /></Link>
         {/* Desktop Menu  */}
         <Menu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu} />
         {/* Mobile Menu  */}
