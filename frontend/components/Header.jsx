@@ -3,7 +3,7 @@ import Wrapper from './Wrapper';
 Wrapper
 import Link from 'next/link'
 import Menu from './Menu';
-import MobileMenu  from './MobileMenu'
+import MobileMenu from './MobileMenu'
 import Image from 'next/image';
 
 // Icons importing
@@ -20,24 +20,24 @@ const Header = () => {
   const [show, setShow] = useState('translate-y-0');
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  const controlNavbar =()=>{
-    if(window.scrollY >200){
-      if(window.scrollY > lastScrollY){
-        setShow('-translate-y-[80px]'  )
-      }else{
+  const controlNavbar = () => {
+    if (window.scrollY > 200) {
+      if (window.scrollY > lastScrollY) {
+        setShow('-translate-y-[80px]')
+      } else {
         setShow('shadow-sm')
       }
-    }else{
+    } else {
       setShow('translate-y-0');
     }
     setLastScrollY(window.scrollY);
   }
-  useEffect(()=>{
-    window.addEventListener('scroll',controlNavbar);
-    return ()=>{
-      window.removeEventListener('scroll',controlNavbar)
+  useEffect(() => {
+    window.addEventListener('scroll', controlNavbar);
+    return () => {
+      window.removeEventListener('scroll', controlNavbar)
     }
-  },[lastScrollY])
+  }, [lastScrollY])
 
 
   return (
@@ -49,17 +49,20 @@ const Header = () => {
         {/* Desktop Menu  */}
         <Menu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu} />
         {/* Mobile Menu  */}
-        { mobileMenu && <MobileMenu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu}
+        {mobileMenu && <MobileMenu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu}
           setMobileMenu={setMobileMenu} />}
 
 
         <div className='flex items-center gap-2 text-black'>
 
           {/* Icons Start  */}
-          <div className='w-8 md:w-12 h-8 md:h-12 rounded-full  flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative'>
-            <BsCart className='text-[15px] md:text-[20px] ' />
-            <div className='h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]'>5</div>
-          </div>
+          <Link href='/cart'>
+            <div className='w-8 md:w-12 h-8 md:h-12 rounded-full  flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative'>
+              <BsCart className='text-[15px] md:text-[20px] ' />
+              <div className='h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]'>5</div>
+            </div>
+          </Link>
+
           {/* icons start  */}
           {/* icon end  */}
           <div className='w-8 md:w-12 h-8 md:h-12 rounded-full  flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative'>
