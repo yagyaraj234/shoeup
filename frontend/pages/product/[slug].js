@@ -1,7 +1,7 @@
-const { default: Wrapper } = require("@/components/Wrapper");
-
 import ProductDetailsCrousel from '@/components/ProductDetailsCrousel';
 import React from 'react'
+import Wrapper from '@/components/Wrapper';
+import { IoMdHeartEmpty } from 'react-icons/io';
 
 const ProductDetails = () => {
   return (
