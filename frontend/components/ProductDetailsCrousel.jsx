@@ -1,9 +1,12 @@
 import React from 'react'
+import {Carousel} from 'react-responsive-carousel'
 
 const ProductDetailsCrousel = () => {
   return (
-    <div>ProductDetailsCrousel</div>
+    <div>
+      <Carousel/>
+    </div>
   )
 }
 
-export default ProductDetailsCrousel
+export default ProductDetailsCrousel;
