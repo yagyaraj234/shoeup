@@ -4,7 +4,6 @@ import React from 'react'
 
 const ProductCard = () => {
     return (
-        <div>
             <Link href='/product1'
             className="transform overflow-hidden bg-white duration-200 hover:scale-105 cursor-pointer"
             >
@@ -23,7 +22,7 @@ const ProductCard = () => {
                     </div>
                 </div>
             </Link>
-        </div>
+        
     )
 }
 
