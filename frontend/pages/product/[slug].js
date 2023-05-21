@@ -3,7 +3,7 @@ import React from 'react'
 import Wrapper from '@/components/Wrapper';
 import { IoMdHeartEmpty } from 'react-icons/io';
 import ReactMarkdown from "react-markdown";
-import RelatedProducts from '@/components/ProductDetailsCrousel'
+import RelatedProducts from '@/components/RelatedProducts'
 
 const ProductDetails = () => {
   return (
