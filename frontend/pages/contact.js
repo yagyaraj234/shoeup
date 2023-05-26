@@ -3,7 +3,7 @@ import { PhoneIcon, MapPinIcon,ChatBubbleOvalLeftEllipsisIcon} from "@heroicons/
 
 const contact = () => {
   return (
-    <div className="md:px-40">
+    <div className="md:px-40">   
       <h1 className="text-3xl uppercase border-b-2 py-2 my-2">Contact us</h1>
 
       <div className="flex flex-row gap-10 my-10">
