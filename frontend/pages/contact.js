@@ -3,11 +3,11 @@ import { PhoneIcon, MapPinIcon,ChatBubbleOvalLeftEllipsisIcon} from "@heroicons/
 
 const contact = () => {
   return (
-    <div className="md:px-40">   
+    <div className="md:px-40 px-5">   
       <h1 className="text-3xl uppercase border-b-2 py-2 my-2">Contact us</h1>
 
       <div className="flex flex-row gap-10 my-10">
-        <PhoneIcon className="h-[40px] w-[40px] " />
+        <PhoneIcon className="mr-4 md:mr-0 h-[40px] w-[40px] " />
         <div className="flex flex-col md:w-[230px]">
           <p className=" font-semibold ">1800 811 4282</p>
           <p className="text-sm">
