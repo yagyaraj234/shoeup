@@ -7,13 +7,17 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "frontend": "npm run dev",
+    "dev": "concurrently \"npm run develop\" \"npm run frontend\"",
+    "client": "npm start --prefix ../frontend"
   },
   "dependencies": {
     "@strapi/plugin-i18n": "4.10.5",
     "@strapi/plugin-users-permissions": "4.10.5",
     "@strapi/provider-upload-cloudinary": "^4.10.5",
     "@strapi/strapi": "4.10.5",
+    "concurrently": "^8.0.1",
     "pg": "8.8.0"
   },
   "author": {
