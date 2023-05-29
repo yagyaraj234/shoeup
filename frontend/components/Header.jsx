@@ -11,6 +11,7 @@ import { IoMdHeartEmpty } from 'react-icons/io'
 import { BsCart } from 'react-icons/bs'
 import { BiMenuAltRight } from 'react-icons/bi'
 import { VscChromeClose } from 'react-icons/vsc'
+import { fetchDataFromApi } from '@/utils/api';
 
 
 const Header = () => {
@@ -19,6 +20,7 @@ const Header = () => {
   const [showCatMenu, setShowCatMenu] = useState(false);
   const [show, setShow] = useState('translate-y-0');
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [categories, setCategories] = useState(null);
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {
@@ -40,6 +42,14 @@ const Header = () => {
   }, [lastScrollY])
 
 
+  useEffect(() => {
+    fetchCategories();
+  }, [])
+  const fetchCategories = async () => {
+    const { data } = await fetchDataFromApi('/api/categories?populate=*')
+    setCategories(data);
+  }
+
   return (
     <header className={`w-full h-[50px] md:h-[60px] bg-white items-center justify-between
      md:px-[150px]  z-20 sticky top-0 transition-transform dutation-300 ${show} `}>
@@ -47,10 +57,12 @@ const Header = () => {
       <Wrapper className='h-[60px] flex justify-between items-center '>
         <Link href="/"><Image src='/logo.svg' className="w-[40px] md:w-[60px] alt" alt='logo' width={40} height={40} /></Link>
         {/* Desktop Menu  */}
-        <Menu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu} />
+        <Menu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu}
+          categories={categories} />
         {/* Mobile Menu  */}
         {mobileMenu && <MobileMenu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu}
-          setMobileMenu={setMobileMenu} />}
+          setMobileMenu={setMobileMenu}
+          categories={categories} />}
 
 
         <div className='flex items-center gap-2 text-black'>
