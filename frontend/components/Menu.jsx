@@ -1,7 +1,5 @@
 import React from 'react'
 import Link from 'next/link';
-// import { BsChevronDown } from 'react-icons'
-// import {C} from '@heroicons/react'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 
 const data = [
