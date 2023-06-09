@@ -5,14 +5,33 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import ReactMarkdown from "react-markdown";
 import RelatedProducts from "@/components/RelatedProducts";
 import { fetchDataFromApi } from "@/utils/api";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "@/store/cartSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetails = ({ product, products }) => {
   const [selectedSize, setSelectedSize] = useState();
   const [showError, setShowError] = useState(false);
+  const dispatch = useDispatch();
+
+  const notify = () => {
+    toast.success("Item added to Cart", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
 
   const p = product?.data?.[0]?.attributes;
   return (
     <div className="w-full md:py-20">
+      <ToastContainer />
       <Wrapper>
         <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[50px]">
           {/* Left Side Start  */}
@@ -24,7 +43,7 @@ const ProductDetails = ({ product, products }) => {
           {/* Right Side Start  */}
           <div className="flex-[1] py-3">
             {/* Product NAme  */}
-            <div className="text-[34px] font-semibold mb-2">{p.name}</div>
+            <div className="text-[34px] font-semibold mb-2 leading-tight">{p.name}</div>
 
             {/* Product Subtitle  */}
             <div className="text-lg font-semibold mb-5">{p.subtitle}</div>
@@ -51,18 +70,18 @@ const ProductDetails = ({ product, products }) => {
 
               {/* Size Start  */}
 
-              <div id="sizesGrid" className="grid grid-cols-3 gap-2">
+              <div id="sizesGrid" className="grid grid-cols-3 gap-2 mb-4">
                 {p.size.data.map((item, i) => (
                   <div
                     key={i}
                     className={`border rounded-md text-center py-3 font-medium  ${
                       item.enabled
                         ? "hover:border-black cursor-pointer"
-                        : "cursor-not-allowed bg-black/[0.1] opacity-50" 
-                    } ${selectedSize === item.size? 'border-black':''}`}
+                        : "cursor-not-allowed bg-black/[0.1] opacity-50"
+                    } ${selectedSize === item.size ? "border-black" : ""}`}
                     onClick={() => {
                       setSelectedSize(item.size);
-                      setShowError(false)
+                      setShowError(false);
                     }}
                   >
                     {item.size}
@@ -80,15 +99,27 @@ const ProductDetails = ({ product, products }) => {
               )}
               {/* Size Error Message End  */}
 
-              <button className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75" onClick={()=>{
-                if(!selectedSize){
-                  setShowError(true)
-                  document.getElementById("sizesGrid").scrollIntoView({
-                    block:"center",
-                    behavior:"smooth"
-                  })
-                }
-              }}>
+              <button
+                className="w-full py-4 rounded-full bg-black text-white text-lg font-medium transition-transform active:scale-95 mb-3 hover:opacity-75"
+                onClick={() => {
+                  if (!selectedSize) {
+                    setShowError(true);
+                    document.getElementById("sizesGrid").scrollIntoView({
+                      block: "center",
+                      behavior: "smooth",
+                    });
+                  } else {
+                    dispatch(
+                      addToCart({
+                        ...product?.data?.[0],
+                        selectedSize,
+                        oneQuantityPrice: p.price,
+                      })
+                    );
+                    notify();
+                  }
+                }}
+              >
                 Add to Cart
               </button>
               {/* ADD TO CART BUTTON END */}
@@ -114,7 +145,7 @@ const ProductDetails = ({ product, products }) => {
           {/* Right Side End  */}
         </div>
 
-        <RelatedProducts  products={products} />
+        <RelatedProducts products={products} />
       </Wrapper>
     </div>
   );
