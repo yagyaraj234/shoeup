@@ -1,78 +1,104 @@
-import React from 'react'
-import { RiDeleteBin6Line } from 'react-icons/ri'
+import React from "react";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import Image from "next/image";
+import { updateCart, removeFromCart } from "@/store/cartSlice";
+import { useDispatch } from "react-redux";
 
-const CartItem = () => {
-    return (
-        <div className='flex py-5 md:gap-5 border-b'>
-            {/* image Start  */}
-            <div className="shrink-0 aspect-square w-[50px] md:w-[120px] ">
-                <img src="product-1.webp" alt="product image" />
-            </div>
-            {/* image End */}
+const CartItem = ({ data }) => {
+  const p = data.attributes;
+  const dispatch = useDispatch();
 
-            <div className="w-full flex flex-col">
-                <div className="flex flex-col md:flex-row justify-between">
-                    {/* PRODUCT TITLE */}
-                    <div className="text-lg md:text-2xl font-semibold text-black/[0.8]">
-                        name
-                    </div>
+  const updateCartItem = (e, key) => {
+    let payload = {
+      key,
+      val: key === "quantity" ? parseInt(e.target.value) : e.target.value,
+      id: data.id,
+    };
+    dispatch(updateCart(payload));
+  };
+  return (
+    <div className="flex py-2 md:gap-5 border-b">
+      {/* image Start  */}
+      <div className="shrink-0 aspect-square w-[50px] md:w-[120px] ">
+        <Image
+          src={p.thumbnail.data.attributes.url}
+          alt={p.name}
+          width={120}
+          height={120}
+        />
+      </div>
+      {/* image End */}
 
-                    {/* PRODUCT SUBTITLE */}
-                    <div className="text-sm md:text-md font-medium text-black/[0.5] block md:hidden">
-                        sub name
-                    </div>
+      <div className="w-full flex flex-col">
+        <div className="flex flex-col md:flex-row justify-between">
+          {/* PRODUCT TITLE */}
+          <div className="text-lg md:text-2xl font-semibold text-black/[0.8]">
+            {p.name}
+          </div>
 
-                    {/* PRODUCT PRICE */}
-                    <div className="text-sm md:text-md font-bold text-black/[0.5] mt-2">
-                        MRP : 19 435
-                    </div>
-                </div>
-           
-           
-             {/* Product subname  */}
-             <div className="text-md font-medium text-black/[0.5] hidden md:block">
-                Men&apos;s Golf Shoes
-                </div>
+          {/* PRODUCT SUBTITLE */}
+          <div className="text-sm md:text-md font-medium text-black/[0.5] block md:hidden">
+            {p.subname}
+          </div>
 
-             
-
-            <div className="flex items-center justify-between mt-4">
-            <div className='flex items-center gap-2 md:gap-10 text-black/[0.5] text-sm md:text-md '>
-                <div className="flex item-center gap-1">
-                    <div className="font-semibold">Size:</div>
-                    <select className='hover:text-black'>
-                        <option value="1">6</option>
-                        <option value="2">6.5</option>
-                        <option value="3">7</option>
-                        <option value="4">7.5</option>
-                        <option value="5">8</option>
-                        <option value="6">8.5</option>
-                        <option value="7">9</option>
-                        <option value="8">9.5</option>
-                        <option value="9">10</option>
-                        <option value="10">10.5</option>
-                    </select>
-                </div>
-                <div className="flex item-center gap-1">
-                    <div className="font-semibold">Quantity:</div>
-                    <select className='text-black outline-none'>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                       
-                    </select>
-                </div>
-
-            </div>
-
-            <RiDeleteBin6Line  className='cursor-pointer text-black/[0.5] hover:text-black text-[16px] md:text-[20px] '/>
-            </div>
+          {/* PRODUCT PRICE */}
+          <div className="text-sm md:text-md font-bold text-black/[0.5] mt-2">
+            MRP : &#8377;{p.price}
+          </div>
         </div>
-        </div>
-    )
-}
 
-export default CartItem
+        {/* Product subname  */}
+        <div className="text-md font-medium text-black/[0.5] hidden md:block">
+          {p.subname}
+        </div>
+
+        <div className="flex items-center justify-between mt-4">
+          <div className="flex items-center gap-2 md:gap-10 text-black/[0.5] text-sm md:text-md ">
+            <div className="flex item-center gap-1">
+              <div className="font-semibold">Size:</div>
+              <select
+                className="hover:text-black"
+                onChange={(e) => updateCartItem(e, "selectedSize")}
+              >
+                {p.size.data.map((item, i) => {
+                  return (
+                    <option
+                      key={i}
+                      value={item.size}
+                      disabled={!item.enabled ? true : false}
+                      selected={data.selectedSize === item.size}
+                    >
+                      {item.size}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div className="flex item-center gap-1">
+              <div className="font-semibold">Quantity:</div>
+              <select
+                className="text-black outline-none"
+                onChange={(e) => updateCartItem(e, "quantity")}
+              >
+                {Array.from({ length: 10 }, (_, i) => i + 1).map((q, i) => {
+                  return (
+                    <option key={i} selected={data.quantity === q} value={q}>
+                      {q}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </div>
+
+          <RiDeleteBin6Line
+            className="cursor-pointer text-black/[0.5] hover:text-black text-[16px] md:text-[20px] "
+            onClick={() => dispatch(removeFromCart({ id: data.id }))}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CartItem;
