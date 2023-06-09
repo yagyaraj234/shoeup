@@ -30,7 +30,7 @@ const ProductDetails = ({ product, products }) => {
 
   const p = product?.data?.[0]?.attributes;
   return (
-    <div className="w-full md:py-20">
+    <div className="w-full md:py-5">
       <ToastContainer />
       <Wrapper>
         <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[50px]">
@@ -43,7 +43,9 @@ const ProductDetails = ({ product, products }) => {
           {/* Right Side Start  */}
           <div className="flex-[1] py-3">
             {/* Product NAme  */}
-            <div className="text-[34px] font-semibold mb-2 leading-tight">{p.name}</div>
+            <div className="text-[34px] font-semibold mb-2 leading-tight">
+              {p.name}
+            </div>
 
             {/* Product Subtitle  */}
             <div className="text-lg font-semibold mb-5">{p.subtitle}</div>
@@ -53,7 +55,7 @@ const ProductDetails = ({ product, products }) => {
             <div className="text-md font-medium text-black/[0.5]">
               incl. of taxes
             </div>
-            <div className="text-md font-medium text-black/[0.5] mb-20">
+            <div className="text-md font-medium text-black/[0.5] mb-5">
               {`(Also includes all applicable duties)`}
             </div>
 
