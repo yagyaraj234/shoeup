@@ -1,12 +1,12 @@
 E-commerce Shoe Store
 =====================
-
+![''](image.png)
 This is an e-commerce shoe store application where users can browse and purchase shoes online. The frontend is built with Next.js and Redux, while the backend is deployed on Render and utilizes Stripe for payments and Cloudinary for image storage. The PostgreSQL database is hosted on Render as well.
 
 Live Project
 ------------
 
-The live version of the project can be accessed [here](https://your-live-project-link/).
+The live version of the project can be accessed [here](https://shoeup.vercel.app/).
 
 Features
 --------
@@ -41,7 +41,7 @@ Getting Started
 
 To run the project locally, follow these steps:
 
-1.  Clone the repository: `git clone https://github.com/your-repo-url.git`
+1.  Clone the repository: `git clone https://github.com/yagyaraj234/shoe-ecommerce-website.git`
 2.  Install the dependencies: `npm install`
 3.  Configure the necessary environment variables for Stripe, Cloudinary, and PostgreSQL.
 4.  Start the development server: `npm run dev`
