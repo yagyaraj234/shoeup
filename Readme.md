@@ -1,6 +1,6 @@
 E-commerce Shoe Store
 =====================
-![''](image.png)
+![''](./image.png)
 
 <p style="text-center">
   <img src="./image.png" alt="E-commerce Shoe Store" width="500px">
