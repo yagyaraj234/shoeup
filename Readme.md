@@ -1,9 +1,9 @@
 # E-commerce Shoe Store
 
-!['shoe store'](./image.webp)
+!['shoe store'](image.webp)
 
 <p style="text-center">
-  <img src="./image.png" alt="E-commerce Shoe Store" width="500px">
+  <img src="./image.webp" alt="E-commerce Shoe Store" width="500px">
 </p>
 This is an e-commerce shoe store application where users can browse and purchase shoes online. The frontend is built with Next.js and Redux, while the backend is deployed on Render and utilizes Stripe for payments and Cloudinary for image storage. The PostgreSQL database is hosted on Render as well.
 
