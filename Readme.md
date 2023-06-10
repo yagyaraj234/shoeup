@@ -1,6 +1,6 @@
 # E-commerce Shoe Store
 
-!['shoe store'](image.webp)
+!['shoe store'](./image%20(Small).jpeg)
 
 <p style="text-center">
   <img src="./image.webp" alt="E-commerce Shoe Store" width="500px">
