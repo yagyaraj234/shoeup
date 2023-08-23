@@ -6,7 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Provider } from "react-redux";
 import store from "@/store/store";
-
+import { persistor } from "@/store/store";
+import { PersistGate } from "redux-persist/lib/integration/react";
 export default function App({ Component, pageProps }) {
   return (
     <>
@@ -27,9 +28,11 @@ export default function App({ Component, pageProps }) {
         />
       </Head>
       <Provider store={store}>
-        <Header></Header>
-        <Component {...pageProps} />
-        <Footer />
+        <PersistGate persistor={persistor}>
+          <Header></Header>
+          <Component {...pageProps} />
+          <Footer />
+        </PersistGate>
       </Provider>
     </>
   );
