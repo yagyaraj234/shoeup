@@ -11,11 +11,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const Cart = () => {
   const [loading, setLoading] = useState(false);
-<<<<<<< HEAD
-  const cartItems = useSelector((state) => state.persistCartReducer.cart);
-=======
   const { cartItems } = useSelector((state) => state.cart);
->>>>>>> parent of c7f3425 (redux persist added for local storage to store cart items)
 
   const subTotal = useMemo(() => {
     return cartItems.reduce((total, val) => total + val.attributes.price, 0);
